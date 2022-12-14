@@ -57,3 +57,7 @@ out/
 ### Java ###
 # Compiled class file
 *.class
+
+# front-end #
+**/front-end/node_modules/**
+**/front-end/static/**
