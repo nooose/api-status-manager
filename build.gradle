@@ -55,7 +55,7 @@ hibernate {
 
 node {
 	nodeModulesDir = file("$projectDir/front-end")
-	version = '18.3.0'
+	version = '18.12.1'
 	download = true
 }
 
@@ -64,12 +64,12 @@ task npmBuild(type: NpmTask) {
 }
 
 task copyFrontEnd(type: Copy) {
-	from "$projectDir/front-end/static"
+	from "$projectDir/front-end/build"
 	into 'build/resources/main/static/.'
 }
 
 task cleanFrontEnd(type: Delete) {
-	delete "$projectDir/front-end/static", "$projectDir/front-end/node_modules"
+	delete "$projectDir/front-end/build", "$projectDir/front-end/node_modules"
 }
 
 npmBuild.dependsOn npmInstall
