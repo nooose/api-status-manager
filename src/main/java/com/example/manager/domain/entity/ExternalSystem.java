@@ -6,9 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,28 +17,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "common_code")
-public class CommonCode extends AuditingFields {
+@Table(name = "external_system")
+public class ExternalSystem extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_num")
+    @Column(name = "system_num")
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "parent_num")
-    private CommonCode parent;
-
-    @Column(name = "depth_level")
-    private int depthLevel;
-
-    @Column(name = "view_order")
-    private int viewOrder;
-
-    @Column(name = "code_id")
-    private String codeId;
-    @Column(name = "code_name")
+    @Column(name = "system_name")
     private String name;
-    @Column(name = "code_description")
+    @Column(name = "system_desc")
     private String description;
+
+    @OneToMany(mappedBy = "externalSystem")
+    private List<ApiExternalSystem> apiExternalSystems = new ArrayList<>();
 }

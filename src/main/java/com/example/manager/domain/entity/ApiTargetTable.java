@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,28 +16,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "common_code")
-public class CommonCode extends AuditingFields {
+@Table(name = "api_target_table")
+public class ApiTargetTable extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_num")
+    @Column(name = "api_table_num")
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "parent_num")
-    private CommonCode parent;
+    @ManyToOne
+    @JoinColumn(name = "api_num")
+    private Api api;
 
-    @Column(name = "depth_level")
-    private int depthLevel;
+    @ManyToOne
+    @JoinColumn(name = "table_num")
+    private TargetTable table;
 
-    @Column(name = "view_order")
-    private int viewOrder;
-
-    @Column(name = "code_id")
-    private String codeId;
-    @Column(name = "code_name")
-    private String name;
-    @Column(name = "code_description")
-    private String description;
+    // TODO: 조회 여부 코드번호
+    // TODO: 생성 여부 코드번호
+    // TODO: 수정 여부 코드번호
+    // TODO: 삭제 여부 코드번호
 }

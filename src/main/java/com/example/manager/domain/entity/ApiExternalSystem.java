@@ -8,27 +8,30 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import java.util.List;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class ServiceItemValue extends AuditingFields {
+@Table(name = "api_external_system")
+public class ApiExternalSystem extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "item_value_num")
+    @Column(name = "api_system_num")
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "item_num")
-    private ServiceItem serviceItem;
+    @JoinColumn(name = "api_num")
+    private Api api;
 
     @ManyToOne
-    @JoinColumn(name = "service_num")
-    private MicroService service;
+    @JoinColumn(name = "system_num")
+    private ExternalSystem externalSystem;
 
-    @OneToMany(mappedBy = "serviceItemValue")
-    private List<ServiceItemValueHistory> histories;
+    // TODO: 조회 여부 코드번호
+    // TODO: 처리 여부 코드번호
 }

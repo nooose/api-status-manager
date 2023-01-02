@@ -1,4 +1,4 @@
-package com.example.manager.domain.entity;
+package com.example.manager.domain.entity.service;
 
 import com.example.manager.domain.AuditingFields;
 import jakarta.persistence.Column;
@@ -8,10 +8,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@Table(name = "service_item")
 public class ServiceItem extends AuditingFields {
 
     @Id
@@ -23,7 +28,7 @@ public class ServiceItem extends AuditingFields {
     @JoinColumn(name = "parent_num")
     private ServiceItem parent;
 
-    @Column(name = "depth_level")
+    @Column(name = "dept_level")
     private int depthLevel;
 
     @Column(name = "view_order")
@@ -33,6 +38,8 @@ public class ServiceItem extends AuditingFields {
     private String itemId;
     @Column(name = "item_name")
     private String name;
+
+    // TODO: 값 형식 코드번호
     @Column(name = "item_desc")
     private String description;
 }

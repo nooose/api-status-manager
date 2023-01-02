@@ -1,13 +1,15 @@
 package com.example.manager.domain.entity;
 
 import com.example.manager.domain.AuditingFields;
+import com.example.manager.domain.entity.project.ProjectApi;
+import com.example.manager.domain.entity.project.ProjectMember;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,28 +18,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@Table(name = "common_code")
-public class CommonCode extends AuditingFields {
-
+@Table(name = "api_member")
+public class ApiMember extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_num")
+    @Column(name = "api_member_num")
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "parent_num")
-    private CommonCode parent;
+    @ManyToOne
+    @JoinColumn(name = "project_api_num")
+    private ProjectApi projectApi;
 
-    @Column(name = "depth_level")
-    private int depthLevel;
+    @ManyToOne
+    @JoinColumn(name = "member_num")
+    private ProjectMember projectMember;
 
-    @Column(name = "view_order")
-    private int viewOrder;
-
-    @Column(name = "code_id")
-    private String codeId;
-    @Column(name = "code_name")
-    private String name;
-    @Column(name = "code_description")
-    private String description;
+    // TODO: 담당 역할 코드번호
+    // TODO: 참여 상태 코드번호
 }
